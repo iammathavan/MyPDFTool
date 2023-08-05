@@ -20,8 +20,10 @@ class App:
         root.resizable(width=False, height=False)
         root.configure(background="#272829")
 
+        #Store the order of the pages that the user entered in the entry. I.E. 2-1-4-3
         self.pages = tk.StringVar()
 
+        # The Main label at the top of the application
         mainLabel=tk.Label(root)
         mainLabel["activebackground"] = "#272829"
         mainLabel["activeforeground"] = "#272829"
@@ -33,6 +35,7 @@ class App:
         mainLabel["text"] = "Image to PDF"
         mainLabel.place(x=210,y=10,width=206,height=71)
 
+        # The Listbox that displays all the images that were selected to convert into PDF (in order)
         self.displayImages = tk.Listbox(root)
         ft = tkFont.Font(family='Helvetica',size=10)
         self.displayImages["font"] = ft
@@ -42,6 +45,7 @@ class App:
         self.displayImages.insert(1, "Images: None Selected")
         self.displayImages.place(x=100,y=100,width=400,height=50)
 
+        # Select Images Button 
         selImageBtn=tk.Button(root)
         ft = tkFont.Font(family='Helvetica',size=12)
         selImageBtn["font"] = ft
@@ -52,6 +56,7 @@ class App:
         selImageBtn.place(x=150,y=225,width=150,height=50)
         selImageBtn["command"] = self.selImageBtn_command
 
+        # Label that displays the selected PDF
         self.displayPDF=tk.Label(root)
         ft = tkFont.Font(family='Helvetica',size=10)
         self.displayPDF["font"] = ft
@@ -61,6 +66,7 @@ class App:
         self.displayPDF["text"] = "PDF: None Selected"
         self.displayPDF.place(x=100,y=170,width=400,height=30)
 
+        # Button that will convert Images to PDF
         convertBtn=tk.Button(root)
         ft = tkFont.Font(family='Helvetica',size=12)
         convertBtn["font"] = ft
@@ -71,6 +77,7 @@ class App:
         convertBtn.place(x=325,y=225,width=150,height=50)
         convertBtn["command"] = self.convertBtn_command
 
+        # Entry to get the user's order in which they want to alter the pages into
         pagesEntry=tk.Entry(root)
         pagesEntry["borderwidth"] = "2px"
         ft = tkFont.Font(family='Helvetica',size=14)
@@ -81,7 +88,9 @@ class App:
         pagesEntry["text"] = "Entry"
         pagesEntry["textvariable"] = self.pages
         pagesEntry.place(x=150,y=310,width=250,height=60)
+        pagesEntry.insert(0, 'E.G 1-2-3-4')
 
+        # Button to select the PDF they want to alter the order of
         selPDFBtn=tk.Button(root)
         ft = tkFont.Font(family='Helvetica',size=10)
         selPDFBtn["font"] = ft
@@ -92,6 +101,7 @@ class App:
         selPDFBtn.place(x=400,y=310,width=75,height=30)
         selPDFBtn["command"] = self.selPDFBtn_command
 
+        # Button to alter the order of pages of the selected PDF
         alterBtn=tk.Button(root)
         ft = tkFont.Font(family='Helvetica',size=10)
         alterBtn["font"] = ft
@@ -102,12 +112,15 @@ class App:
         alterBtn.place(x=400,y=340,width=75,height=30)
         alterBtn["command"] = self.alterBtn_command
 
+    # This function will get the relative path of an absolute path.
     @staticmethod
     def getRelativePath(absolutePath):
         curDirectory = os.getcwd()
         relativePath = os.path.relpath(absolutePath, curDirectory)
         return relativePath
 
+    # This function will open the images in file, store it in a global variable imgNames,
+    # reset the displayImages Listbox, and then diplay the new images in displayImages Listbox
     def selImageBtn_command(self):
         global imgNames
         imgNames = filedialog.askopenfilenames(initialdir="images", title="Select Images", filetypes=[('jpg images', '*.jpg')])
@@ -117,7 +130,8 @@ class App:
             self.displayImages.insert(count, i)
             count += 1
 
-
+    # This function will convert the images to a single pdf, and will ask the user to where 
+    # to save the newly created pdf 
     def convertBtn_command(self):
         try:
             saveFile = filedialog.asksaveasfilename(initialdir="./", title="Save File", filetypes=[('PDF Files', '*.pdf')])
@@ -129,7 +143,9 @@ class App:
         except:
             messagebox.showerror("File Opening Error", "Make sure to select the correct images before converting")
 
-
+    # This function ask the user to select a pdf that they want to alter the order of the pages,
+    # save the pdf in a global variable called pdfName, get the relative path of the pdf so it
+    # will be displayed on the displayPDF Label in a short form. 
     def selPDFBtn_command(self):
         try:
             global pdfName
@@ -138,7 +154,8 @@ class App:
         except:
             messagebox.showerror("File Opening Error", "Make sure to select the correct pdf before altering the order")
 
-
+    # This function get the list of pages from the Entry, clean up the formatted numbers, create a new pdf 
+    # with the order specified, ask the user where and what to save as the newly created pdf
     def alterBtn_command(self):
         try:
             thePages = list(self.pages.get())
