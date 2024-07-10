@@ -29,15 +29,15 @@ class PDFToolApp:
                     
 
         self.pdf_to_image_icon = Image.open("photo.png")
-        self.pdf_to_image_icon = self.pdf_to_image_icon.resize((20, 20), Image.LANCZOS)
+        self.pdf_to_image_icon = self.pdf_to_image_icon.resize((32, 32), Image.LANCZOS)
         self.pdf_to_image_icon = ImageTk.PhotoImage(self.pdf_to_image_icon)
 
         self.image_to_pdf_icon = Image.open("pdf-file.png")
-        self.image_to_pdf_icon = self.image_to_pdf_icon.resize((20, 20), Image.LANCZOS)
+        self.image_to_pdf_icon = self.image_to_pdf_icon.resize((32, 32), Image.LANCZOS)
         self.image_to_pdf_icon = ImageTk.PhotoImage(self.image_to_pdf_icon)
 
         self.alter_icon = Image.open("document.png")
-        self.alter_icon = self.alter_icon.resize((20, 20), Image.LANCZOS)
+        self.alter_icon = self.alter_icon.resize((32, 32), Image.LANCZOS)
         self.alter_icon = ImageTk.PhotoImage(self.alter_icon)
         
         # Top frame
