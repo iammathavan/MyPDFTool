@@ -10,8 +10,9 @@ GREY = "#758694"
 BEIGE = "#F7E7DC"
 WHITE = "#FFF8F3"
 
-class PDFToolApp:
+class myPDFTool:
     def __init__(self, root):
+        # Set the main frame
         self.root = root
         self.root.title("MyPDF Tools")
         self.root.geometry("600x400")
@@ -72,7 +73,7 @@ class PDFToolApp:
         alter_btn.pack(pady=10, ipadx=10, ipady=10, fill=tk.X)
         
     def merge_pdfs(self):
-        subprocess.Popen(["python", "merge_pdf.py"])
+        subprocess.Popen(["python", "./tools/merge_pdf.py"])
 
     def pdf_to_image(self):
         # PDF to Image functionality
@@ -88,5 +89,5 @@ class PDFToolApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = PDFToolApp(root)
+    app = myPDFTool(root)
     root.mainloop()

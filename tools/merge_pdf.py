@@ -9,7 +9,7 @@ GREY = "#758694"
 BEIGE = "#F7E7DC"
 WHITE = "#FFF8F3"
 
-class MergePDFsApp:
+class MergePDFs:
     def __init__(self, root):
         self.root = root
         self.root.title("Merge PDFs")
@@ -58,7 +58,7 @@ class MergePDFsApp:
         right_icon = tk.Label(top_frame, image=self.pdf_icon, bg=WHITE)
         right_icon.pack(side=tk.RIGHT, padx=10)
         
-        # Label for selected PDFs
+        # Label for displaying "Selected PDFs:"
         selected_label = tk.Label(self.root, text="Selected PDFs:", font=Font(family="Helvetica", size=16), bg=NAVY, fg=WHITE)
         selected_label.pack(pady=20)
         
@@ -86,32 +86,46 @@ class MergePDFsApp:
         delete_button = tk.Button(button_frame, image=self.delete_icon, compound=tk.RIGHT, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.delete_file)
         delete_button.grid(row=1, column=2, ipadx=1, sticky="ne")
         
+    # This function will handle opening the pdf files once the user clicks open button and 
+    # then update the listbox
     def select_pdfs(self):
         files = filedialog.askopenfilenames(filetypes=[("PDF files", "*.pdf")])
         self.selected_files = list(files)
         self.update_file_listbox()
     
+    # This function will clear the listbox and adds the PDF files based on the selected_files.
     def update_file_listbox(self):
         self.file_listbox.delete(0, tk.END)
         for file in self.selected_files:
             self.file_listbox.insert(tk.END, file)
 
+    # This function will move the selected PDF file in the listbox, up one place, once the user presses
+    # the up arrow button. Basically will replace the currently selected one with one above, and the above
+    # one with the selected one. 
     def move_up(self):
         selected_index = self.file_listbox.curselection()
         if selected_index and selected_index[0] > 0:
             index = selected_index[0]
-            self.selected_files[index], self.selected_files[index - 1] = self.selected_files[index - 1], self.selected_files[index]
+            temp = self.selected_files[index]
+            self.selected_files[index] = self.selected_files[index - 1]
+            self.selected_files[index - 1] = temp
             self.update_file_listbox()
             self.file_listbox.selection_set(index - 1)
     
+    # This function will move the selected PDF file in the listbox, down one place, once the user presses
+    # the down arrow button. Basically will replace the currently selected one with one below, and the below
+    # one with the selected one.
     def move_down(self):
         selected_index = self.file_listbox.curselection()
         if selected_index and selected_index[0] < len(self.selected_files) - 1:
             index = selected_index[0]
-            self.selected_files[index], self.selected_files[index + 1] = self.selected_files[index + 1], self.selected_files[index]
+            temp = self.selected_files[index] 
+            self.selected_files[index] = self.selected_files[index + 1]
+            self.selected_files[index + 1] = temp
             self.update_file_listbox()
             self.file_listbox.selection_set(index + 1)
 
+    # This function will delete the currently selected PDF file.
     def delete_file(self):
         selected_index = self.file_listbox.curselection()
         if selected_index:
@@ -119,6 +133,9 @@ class MergePDFsApp:
             self.selected_files.pop(index)
             self.update_file_listbox()
     
+    # This function handles the merging of all selected PDF files. Using PyPDF2 library, it will
+    # create a new pdf file with each page added in the order it is selected. Asks user where to 
+    # save the newly created PDF. 
     def merge_pdfs(self):
         if self.selected_files:
             pdf_writer = PyPDF2.PdfWriter()
@@ -138,5 +155,5 @@ class MergePDFsApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = MergePDFsApp(root)
+    app = MergePDFs(root)
     root.mainloop()
