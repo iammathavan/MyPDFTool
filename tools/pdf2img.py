@@ -2,14 +2,14 @@ import tkinter as tk
 from tkinter.font import Font
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
-import PyPDF2
+import fitz 
 
 NAVY = "#405D72"
 GREY = "#758694"
 BEIGE = "#F7E7DC"
 WHITE = "#FFF8F3"
 
-class MergePDFs:
+class MergePDFsApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Merge PDFs")
@@ -29,9 +29,9 @@ class MergePDFs:
         self.open_icon = self.open_icon.resize((32, 32), Image.LANCZOS)
         self.open_icon = ImageTk.PhotoImage(self.open_icon)
 
-        self.merge_icon = Image.open("../MyPDFTool-main/images/file.png")
-        self.merge_icon = self.merge_icon.resize((32, 32), Image.LANCZOS)
-        self.merge_icon = ImageTk.PhotoImage(self.merge_icon)
+        self.image_icon = Image.open("../MyPDFTool-main/images/image.png")
+        self.image_icon = self.image_icon.resize((32, 32), Image.LANCZOS)
+        self.image_icon = ImageTk.PhotoImage(self.image_icon)
         
         self.up_icon = Image.open("../MyPDFTool-main/images/up-arrow.png")
         self.up_icon = self.up_icon.resize((32, 32), Image.LANCZOS)
@@ -53,7 +53,7 @@ class MergePDFs:
         left_icon = tk.Label(top_frame, image=self.pdf_icon, bg=WHITE)
         left_icon.pack(side=tk.LEFT, padx=10)
         
-        title = tk.Label(top_frame, text="Merge PDFs", font=Font(family="Helvetica", size=24, weight="bold"), bg=WHITE)
+        title = tk.Label(top_frame, text="PDFs to Images", font=Font(family="Helvetica", size=24, weight="bold"), bg=WHITE)
         title.pack(side=tk.LEFT, padx=154)
         
         right_icon = tk.Label(top_frame, image=self.pdf_icon, bg=WHITE)
@@ -75,8 +75,8 @@ class MergePDFs:
         select_button = tk.Button(button_frame, text="Open", image=self.open_icon, compound=tk.RIGHT, bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, font=Font(family="Helvetica", size=16), command=self.select_pdfs)
         select_button.grid(row=0, column=0, padx=15, pady=10, ipadx=10)
         
-        merge_button = tk.Button(button_frame, text="Merge", image=self.merge_icon, compound=tk.RIGHT, bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, font=Font(family="Helvetica", size=16), command=self.merge_pdfs)
-        merge_button.grid(row=0, column=1, padx=15, pady=10, ipadx=10)
+        convert_button = tk.Button(button_frame, text="Convert", image=self.image_icon, compound=tk.RIGHT, bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, font=Font(family="Helvetica", size=15), command=self.convert_to_image)
+        convert_button.grid(row=0, column=1, padx=15, pady=10, ipadx=5)
 
         up_button = tk.Button(button_frame, image=self.up_icon, compound=tk.RIGHT, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.move_up)
         up_button.grid(row=1, column=0, ipadx=1, sticky="sw")
@@ -133,28 +133,27 @@ class MergePDFs:
             index = selected_index[0]
             self.selected_files.pop(index)
             self.update_file_listbox()
-    
-    # This function handles the merging of all selected PDF files. Using PyPDF2 library, it will
-    # create a new pdf file with each page added in the order it is selected. Asks user where to 
-    # save the newly created PDF. 
-    def merge_pdfs(self):
+        
+    # This function will convert all the PDFs in order to images in png or jpg formats and asks 
+    # the user to save it as for each images. One page in pdf = one image.
+    def convert_to_image(self):
         if self.selected_files:
-            pdf_writer = PyPDF2.PdfWriter()
-            for pdf in self.selected_files:
-                pdf_reader = PyPDF2.PdfReader(pdf)
-                for page_num in range(len(pdf_reader.pages)):
-                    page = pdf_reader.pages[page_num]
-                    pdf_writer.add_page(page)
-            
-            save_path = filedialog.asksaveasfilename(defaultextension=".pdf", filetypes=[("PDF files", "*.pdf")])
-            if save_path:
-                with open(save_path, "wb") as out_file:
-                    pdf_writer.write(out_file)
-                messagebox.showinfo("Success", "PDFs merged successfully!")
+            i = 1
+            for pdf_file in self.selected_files:
+                doc = fitz.open(pdf_file)
+                for page_num in range(len(doc)):
+                    page = doc.load_page(page_num)
+                    pix = page.get_pixmap()
+                    img_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png"), ("JPEG files", "*.jpg"), ("JPEG files", "*.jpeg")], initialfile=f"page_{i}.png")
+                    if img_path:
+                        pix.save(img_path)
+                    i+=1
+            messagebox.showinfo("Success", "PDF pages converted to images successfully!")
         else:
-            messagebox.showwarning("Warning", "No PDFs selected!")
+            messagebox.showwarning("Warning", "No PDF selected!")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = MergePDFs(root)
+    app = MergePDFsApp(root)
     root.mainloop()

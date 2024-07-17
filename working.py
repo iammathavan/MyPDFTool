@@ -20,24 +20,24 @@ class myPDFTool:
         self.root.resizable(width=False, height=False)
         
         # Load and resize images
-        self.pdf_icon = Image.open("pdf-file-top.png")
+        self.pdf_icon = Image.open("./images/pdf-file-top.png")
         self.pdf_icon = self.pdf_icon.resize((32, 32), Image.LANCZOS)
         self.pdf_icon = ImageTk.PhotoImage(self.pdf_icon)
 
-        self.merge_icon = Image.open("file.png")
+        self.merge_icon = Image.open("./images/file.png")
         self.merge_icon = self.merge_icon.resize((32, 32), Image.LANCZOS)
         self.merge_icon = ImageTk.PhotoImage(self.merge_icon)
                     
 
-        self.pdf_to_image_icon = Image.open("photo.png")
+        self.pdf_to_image_icon = Image.open("./images/photo.png")
         self.pdf_to_image_icon = self.pdf_to_image_icon.resize((32, 32), Image.LANCZOS)
         self.pdf_to_image_icon = ImageTk.PhotoImage(self.pdf_to_image_icon)
 
-        self.image_to_pdf_icon = Image.open("pdf-file.png")
+        self.image_to_pdf_icon = Image.open("./images/pdf-file.png")
         self.image_to_pdf_icon = self.image_to_pdf_icon.resize((32, 32), Image.LANCZOS)
         self.image_to_pdf_icon = ImageTk.PhotoImage(self.image_to_pdf_icon)
 
-        self.alter_icon = Image.open("document.png")
+        self.alter_icon = Image.open("./images/document.png")
         self.alter_icon = self.alter_icon.resize((32, 32), Image.LANCZOS)
         self.alter_icon = ImageTk.PhotoImage(self.alter_icon)
         
@@ -63,7 +63,7 @@ class myPDFTool:
         merge_btn = tk.Button(button_frame, text="Merge PDFs", image=self.merge_icon, compound=tk.RIGHT, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.merge_pdfs, padx=10)
         merge_btn.pack(pady=10, ipadx=10, ipady=10, fill=tk.X)
         
-        pdf_to_image_btn = tk.Button(button_frame, text="PDF To Image", image=self.pdf_to_image_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.pdf_to_image)
+        pdf_to_image_btn = tk.Button(button_frame, text="PDFs To Images", image=self.pdf_to_image_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.pdf_to_image)
         pdf_to_image_btn.pack(pady=10, ipadx=10, ipady=10, fill=tk.X)
         
         image_to_pdf_btn = tk.Button(button_frame, text="Image To PDF", image=self.image_to_pdf_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.image_to_pdf)
@@ -76,8 +76,7 @@ class myPDFTool:
         subprocess.Popen(["python", "./tools/merge_pdf.py"])
 
     def pdf_to_image(self):
-        # PDF to Image functionality
-        pass
+        subprocess.Popen(["python", "./tools/pdf2img.py"])
 
     def image_to_pdf(self):
         # Image to PDF functionality
