@@ -138,6 +138,7 @@ class App:
             if not saveFile.endswith(".pdf"):
                 saveFile += ".pdf"
             with open(saveFile, "wb") as pdf:
+                print(imgNames)
                 pdf.write(img2pdf.convert(imgNames))
             pdf.close()
         except:

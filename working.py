@@ -66,7 +66,7 @@ class myPDFTool:
         pdf_to_image_btn = tk.Button(button_frame, text="PDFs To Images", image=self.pdf_to_image_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.pdf_to_image)
         pdf_to_image_btn.pack(pady=10, ipadx=10, ipady=10, fill=tk.X)
         
-        image_to_pdf_btn = tk.Button(button_frame, text="Image To PDF", image=self.image_to_pdf_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.image_to_pdf)
+        image_to_pdf_btn = tk.Button(button_frame, text="Images To PDF", image=self.image_to_pdf_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.image_to_pdf)
         image_to_pdf_btn.pack(pady=10, ipadx=10, ipady=10, fill=tk.X)
         
         alter_btn = tk.Button(button_frame, text="Alter Pages", image=self.alter_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.alter_pages)
@@ -76,11 +76,10 @@ class myPDFTool:
         subprocess.Popen(["python", "./tools/merge_pdf.py"])
 
     def pdf_to_image(self):
-        subprocess.Popen(["python", "./tools/pdf2img.py"])
+        subprocess.Popen(["python", "./tools/pdfs2imgs.py"])
 
     def image_to_pdf(self):
-        # Image to PDF functionality
-        pass
+        subprocess.Popen(["python", "./tools/imgs2pdf.py"])
 
     def alter_pages(self):
         # Alter pages functionality
