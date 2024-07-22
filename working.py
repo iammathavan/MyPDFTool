@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 from tkinter.font import Font
 from PIL import Image, ImageTk
 import subprocess
@@ -69,7 +68,7 @@ class myPDFTool:
         image_to_pdf_btn = tk.Button(button_frame, text="Images To PDF", image=self.image_to_pdf_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.image_to_pdf)
         image_to_pdf_btn.pack(pady=10, ipadx=10, ipady=10, fill=tk.X)
         
-        alter_btn = tk.Button(button_frame, text="Alter Pages", image=self.alter_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.alter_pages)
+        alter_btn = tk.Button(button_frame, text="Edit Pages", image=self.alter_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.alter_pages)
         alter_btn.pack(pady=10, ipadx=10, ipady=10, fill=tk.X)
         
     def merge_pdfs(self):
@@ -82,8 +81,7 @@ class myPDFTool:
         subprocess.Popen(["python", "./tools/imgs2pdf.py"])
 
     def alter_pages(self):
-        # Alter pages functionality
-        pass
+        subprocess.Popen(["python", "./tools/edit_pages.py"])
 
 if __name__ == "__main__":
     root = tk.Tk()

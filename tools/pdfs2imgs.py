@@ -9,10 +9,10 @@ GREY = "#758694"
 BEIGE = "#F7E7DC"
 WHITE = "#FFF8F3"
 
-class MergePDFsApp:
+class PDFs2Images:
     def __init__(self, root):
         self.root = root
-        self.root.title("Merge PDFs")
+        self.root.title("PDFs to Images")
         self.root.geometry("600x450")
         self.root.configure(bg=NAVY)
         self.root.resizable(width=False, height=False)
@@ -54,7 +54,7 @@ class MergePDFsApp:
         left_icon.pack(side=tk.LEFT, padx=10)
         
         title = tk.Label(top_frame, text="PDFs to Images", font=Font(family="Helvetica", size=24, weight="bold"), bg=WHITE)
-        title.pack(side=tk.LEFT, padx=154)
+        title.pack(side=tk.LEFT, padx=120)
         
         right_icon = tk.Label(top_frame, image=self.pdf_icon, bg=WHITE)
         right_icon.pack(side=tk.RIGHT, padx=10)
@@ -155,5 +155,5 @@ class MergePDFsApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = MergePDFsApp(root)
+    app = PDFs2Images(root)
     root.mainloop()

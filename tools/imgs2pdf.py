@@ -9,7 +9,7 @@ GREY = "#758694"
 BEIGE = "#F7E7DC"
 WHITE = "#FFF8F3"
 
-class ImagesToPDFApp:
+class Images2PDF:
     def __init__(self, root):
         self.root = root
         self.root.title("Images to PDF")
@@ -31,10 +31,6 @@ class ImagesToPDFApp:
         self.open_icon = Image.open("../MyPDFTool-main/images/open-folder.png")
         self.open_icon = self.open_icon.resize((32, 32), Image.LANCZOS)
         self.open_icon = ImageTk.PhotoImage(self.open_icon)
-
-        self.image_icon = Image.open("../MyPDFTool-main/images/image.png")
-        self.image_icon = self.image_icon.resize((32, 32), Image.LANCZOS)
-        self.image_icon = ImageTk.PhotoImage(self.image_icon)
         
         self.up_icon = Image.open("../MyPDFTool-main/images/up-arrow.png")
         self.up_icon = self.up_icon.resize((32, 32), Image.LANCZOS)
@@ -151,5 +147,5 @@ class ImagesToPDFApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = ImagesToPDFApp(root)
+    app = Images2PDF(root)
     root.mainloop()
