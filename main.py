@@ -39,6 +39,7 @@ class myPDFTool:
         self.alter_icon = Image.open("./images/document.png")
         self.alter_icon = self.alter_icon.resize((32, 32), Image.LANCZOS)
         self.alter_icon = ImageTk.PhotoImage(self.alter_icon)
+
         
         # Top frame
         top_frame = tk.Frame(self.root, bg=WHITE, height=60)
@@ -70,6 +71,8 @@ class myPDFTool:
         
         alter_btn = tk.Button(button_frame, text="Edit Pages", image=self.alter_icon, compound=tk.RIGHT, padx=10, font=Font(family="Helvetica", size=16), bg=BEIGE, activebackground=GREY, activeforeground=BEIGE, command=self.alter_pages)
         alter_btn.pack(pady=10, ipadx=10, ipady=10, fill=tk.X)
+
+
         
     def merge_pdfs(self):
         subprocess.Popen(["python", "./tools/merge_pdf.py"])
@@ -82,6 +85,7 @@ class myPDFTool:
 
     def alter_pages(self):
         subprocess.Popen(["python", "./tools/edit_pages.py"])
+    
 
 if __name__ == "__main__":
     root = tk.Tk()
