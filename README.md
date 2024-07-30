@@ -1,7 +1,6 @@
 # MyPDF Tools
 
-MyPDF Tools is a comprehensive toolkit for 
-manipulating PDF files. This application offers functionalities to merge PDFs, convert images to PDFs, convert PDFs to images, and edit PDF pages. It's built using Python and Tkinter for the GUI.
+MyPDF Tools is a splendid toolkit for manipulating PDF files. This application offers functionalities to merge PDFs, convert images to PDFs, convert PDFs to images, and edit PDF pages. It is built using Python and Tkinter for the GUI.
 
 ## Features
 
