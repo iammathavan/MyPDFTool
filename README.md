@@ -6,18 +6,18 @@ MyPDF Tools is a splendid toolkit for manipulating PDF files. This application o
 
 ## Features
 
-![Merge Page](/ReadMe-images/Merge-Page.png)
 - **Merge PDFs**: Combine multiple PDF files into one.
-![Img2Pdf Page](/ReadMe-images/Images2Pdf-Page.png)
+  ![Merge Page](/ReadMe-images/Merge-Page.png)
 
 - **Images to PDF**: Convert multiple images into a single PDF.
+  ![Img2Pdf Page](/ReadMe-images/Images2Pdf-Page.png)
 
-![PDFs2Imgs Page](/ReadMe-images/Pdfs2img-Page.png)
 
 - **PDFs to Images**: Convert PDF pages to images.
-![Edit Page](/ReadMe-images/Edit-Page.png)
+  ![PDFs2Imgs Page](/ReadMe-images/Pdfs2img-Page.png)
 
 - **Edit Pages**: Re-arrange or delete pages in a PDF.
+  ![Edit Page](/ReadMe-images/Edit-Page.png)
 
 ## Installation
 
