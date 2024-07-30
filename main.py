@@ -1,7 +1,11 @@
 import tkinter as tk
 from tkinter.font import Font
 from PIL import Image, ImageTk
-import subprocess
+
+from tools.merge_pdf import MergePDFs
+from tools.pdfs2imgs import PDFs2Images
+from tools.imgs2pdf import Images2PDF
+from tools.edit_pages import EditPages
 
 
 NAVY = "#405D72"
@@ -75,16 +79,20 @@ class myPDFTool:
 
         
     def merge_pdfs(self):
-        subprocess.Popen(["python", "./tools/merge_pdf.py"])
+        new_window = tk.Toplevel(self.root)
+        MergePDFs(new_window)
 
     def pdf_to_image(self):
-        subprocess.Popen(["python", "./tools/pdfs2imgs.py"])
+        new_window = tk.Toplevel(self.root)
+        PDFs2Images(new_window)
 
     def image_to_pdf(self):
-        subprocess.Popen(["python", "./tools/imgs2pdf.py"])
+        new_window = tk.Toplevel(self.root)
+        Images2PDF(new_window)
 
     def alter_pages(self):
-        subprocess.Popen(["python", "./tools/edit_pages.py"])
+        new_window = tk.Toplevel(self.root)
+        EditPages(new_window)
     
 
 if __name__ == "__main__":
