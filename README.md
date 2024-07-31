@@ -29,12 +29,19 @@ MyPDF Tools is a splendid toolkit for manipulating PDF files. This application o
 
 ### Prerequisites
 
-Ensure you have Python installed on your machine. You can download it from [python.org](https://www.python.org/).
+Ensure you have Python installed on your machine. You can download it from .
+Ensure you have the latest version of Pip and Python installed on your machine. You can download it from [python](https://www.python.org/) and [pip](https://pip.pypa.io/en/stable/installation/). Make sure that your device also supports Tkinter. 
 
-### Clone the Repository
+1. Clone the repository or download the code files.
 
-Clone the repository to your local machine using:
+2. Install the required libraries if you haven't already:
 
-```bash
-git clone https://github.com/yourusername/MyPDFTool.git
-cd MyPDFTool
+```
+pip install -r requirements.txt
+```
+
+3. Run the script:
+
+```
+python app.py
+```
