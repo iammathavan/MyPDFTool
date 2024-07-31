@@ -43,7 +43,7 @@ pip install -r requirements.txt
 3. Run the script:
 
 ```
-python app.py
+python main.py
 ```
 
 
