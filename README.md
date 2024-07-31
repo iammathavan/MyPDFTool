@@ -45,3 +45,16 @@ pip install -r requirements.txt
 ```
 python app.py
 ```
+
+
+## Documentation
+
+[tkinter library](https://docs.python.org/3/library/tkinter.html)
+
+[image2pdf](https://pypi.org/project/img2pdf/)
+
+[pyPDF2](https://pypi.org/project/PyPDF2/)
+
+[pillow](https://pillow.readthedocs.io/en/stable/)
+
+[PyMuPDF](https://pymupdf.readthedocs.io/en/latest/)
